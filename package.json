@@ -1,0 +1,49 @@
+{
+  "main": "./src/index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "test": "jest",
+    "prettier": "prettier --config .prettierrc.json --list-different 'src/**/*.{js,ts,jsx,tsx,svg}'",
+    "prettier-write": "prettier --config .prettierrc.json --write 'src/**/*.{js,ts,jsx,tsx,svg}'"
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.5.1",
+    "@react-navigation/stack": "^5.5.1",
+    "expo": "~37.0.3",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-elements": "^2.0.2",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-markdown-display": "^6.1.4",
+    "react-native-reanimated": "^1.9.0",
+    "react-native-safe-area-context": "^3.0.5",
+    "react-native-screens": "^2.2.0",
+    "react-native-web": "~0.11.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@types/jest": "^25.2.1",
+    "@types/react": "~16.9.23",
+    "@types/react-native": "~0.61.17",
+    "@types/react-test-renderer": "^16.9.2",
+    "babel-preset-expo": "~8.1.0",
+    "jest-expo": "^37.0.0",
+    "lodash": "^4.17.15",
+    "prettier": "^2.0.5",
+    "react-test-renderer": "^16.13.1",
+    "typescript": "~3.8.3"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ]
+  },
+  "private": true
+}
