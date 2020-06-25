@@ -1,38 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
-import ListItems from './components/ListItems';
-import AuthorDetails from './components/AuthorDetails';
-// import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export function App() {
+import Header from './components/Header';
+import Main from './components/Main';
+import PostDetails from './components/PostDetails';
+
+const Stack = createStackNavigator();
+
+export const App: React.FunctionComponent = () => {
 
   return (
-    // <NavigationContainer>
-    <View>
+    <NavigationContainer>
       <Header />
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Authors</Text>
-        <ListItems />
-        <AuthorDetails />
-      </View>
-    </View>
-    // </NavigationContainer>
+      <Stack.Navigator initialRouteName='Main'>
+        <Stack.Screen name='Main' component={Main} />
+        <Stack.Screen name='PostDetails' component={PostDetails} />
+      </Stack.Navigator>
+    </NavigationContainer >
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    margin: 0,
-    width: '100%',
-  },
-  headerText: {
-    fontSize: 26,
-    color: '#000000',
-    padding: 15,
-  }
-});
+export default App;

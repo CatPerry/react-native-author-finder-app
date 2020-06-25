@@ -19,11 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 0,
     width: '100%',
-  },
-  headerText: {
-    fontSize: 26,
-    color: '#000000',
-    padding: 15,
   }
 });
 export default HeaderComponent;
