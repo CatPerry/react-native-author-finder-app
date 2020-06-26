@@ -1,31 +1,44 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar, Text } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import Markdown from 'react-native-markdown-display';
 
+import PostDetailsModel from '../models/PostDetailsModel';
+
 const PostDetails: React.FunctionComponent = ({ route }) => {
-  const { allAuthorData } = route.params;
+  const { selectedAuthorData } = route.params;
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={{ height: '100%', paddingLeft: 25, paddingRight: 25 }}
+        style={{ height: '100%' }}
       >
-        {allAuthorData.map((data: any) => {
+        {selectedAuthorData.map((data: PostDetailsModel) => {
           return (
-            <>
-              <Text><h2>Book Title: <em>{data.title}</em></h2></Text>
-              <Markdown>
+            <View key={data.title} style={{ backgroundColor: '#FFF', paddingTop: 25, paddingLeft: 25, paddingRight: 25 }}>
+              <Text style={styles.headerText}>Book: {data.title}</Text>
+              <Text style={styles.headerText}>{data.author.name}</Text>
+              <Markdown >
                 {data.body}
               </Markdown>
-            </>
+            </View>
           );
         })}
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  headerText: {
+    fontSize: 28,
+    color: '#848785',
+  },
+  subheadText: {
+    fontSize: 20,
+    marginBottom: 20,
+    color: '#848785',
+  }
+});
 
 export default PostDetails;

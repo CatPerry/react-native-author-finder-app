@@ -1,31 +1,46 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Button, Icon, ListItem } from 'react-native-elements';
 
+import PostDetailsModel from '../models/PostDetailsModel';
 import PostList from './PostList';
-import AuthorDataModel from '../models/PostDetailsModel';
 
 const AuthorList: React.FunctionComponent = () => {
   const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [shouldShowBackButton, setshouldShowBackButton] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:4000/posts')
       .then(response => response.json())
       .then(data => setPosts(data));
-
   }, []);
 
-  const filterByAuthor = (post: AuthorDataModel) => {
-    return setPosts(posts.filter((individual: AuthorDataModel) => individual.author.name === post.author.name));
+  const resetPosts = () => {
+    setFilteredPosts([]);
+    setshouldShowBackButton(false);
+  };
+
+  const filterByAuthor = (post: PostDetailsModel) => {
+    let filteredPosts = posts.filter((individual: PostDetailsModel) => individual.author.name === post.author.name);
+    setFilteredPosts(filteredPosts);
+    // setPosts(filteredPosts);
+    setshouldShowBackButton(true);
+  };
+
+  const showCorrectPosts = () => {
+    return !_.isEmpty(filteredPosts) ? filteredPosts : posts;
   };
 
   return (
-    <View style={styles.columnView}>
-      <View style={styles.authorList}>
+    <ScrollView style={{ paddingTop: 25 }}>
+      <View>
+        {shouldShowBackButton ? <Button title='Back' buttonStyle={{ backgroundColor: '#88adab' }} onPress={() => resetPosts()} />
+          : null}
         {
-          _.uniqBy(posts, 'author.name').map((post: AuthorDataModel) => (
+          _.uniqBy(showCorrectPosts(), 'author.name').map((post: PostDetailsModel) => (
             <TouchableOpacity key={post.id} >
               <ListItem
                 key={post.id}
@@ -37,8 +52,8 @@ const AuthorList: React.FunctionComponent = () => {
           ))
         }
       </View>
-      <PostList posts={posts} style={styles.postList} />
-    </View>
+      <PostList posts={showCorrectPosts()} style={styles.postList} />
+    </ScrollView >
   );
 };
 

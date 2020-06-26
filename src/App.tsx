@@ -14,8 +14,8 @@ export const App: React.FunctionComponent = () => {
     <NavigationContainer>
       <Header />
       <Stack.Navigator initialRouteName='Main'>
-        <Stack.Screen name='Main' component={Main} />
-        <Stack.Screen name='PostDetails' component={PostDetails} />
+        <Stack.Screen name='Author Finder' component={Main} />
+        <Stack.Screen name='PostDetails' component={PostDetails} options={{ tabBarLabel: 'Home!' }} />
       </Stack.Navigator>
     </NavigationContainer >
   );

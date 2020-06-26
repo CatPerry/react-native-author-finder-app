@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import _ from 'lodash';
-import { StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, ListItem, Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,32 +15,33 @@ interface Props {
 const PostList = (props: Props) => {
   const navigation = useNavigation();
 
-  const passAllAuthorDataFilter = (post: PostDetailsModel) => {
-    const allAuthorData: PostDetailsModel[] = props.posts.filter((author: PostDetailsModel) => author.author.name === post.author.name);
-    // onPress, navigate to PostDetails page with all Book data listed
+  const filterBySelectedAuthor = (post: PostDetailsModel) => {
+    const selectedAuthorData: PostDetailsModel[] = props.posts.filter((author: PostDetailsModel) => author.author.name === post.author.name);
     navigation.navigate('PostDetails', {
-      allAuthorData
+      selectedAuthorData
     });
   };
 
   return (
-    <SafeAreaView style={{ width: '100%', justifyContent: 'flex-start', marginRight: 30, }}>
-      {
-        _.orderBy(props.posts, ['publishedAt'], ['desc']).map((post: PostDetailsModel) => (
-          <TouchableOpacity key={post.id} style={styles.postList} onPress={() => passAllAuthorDataFilter(post)}>
-            <Card key={post.id} containerStyle={{ padding: 0, width: '100%' }} >
-              <ListItem
-                key={post.id}
-                title={post.title}
-                subtitle={post.author.name}
-                bottomDivider
-              />
-              <Text style={styles.cardStyle}>{post.body}</Text>
-              <Text>{post.publishedAt}</Text>
-            </Card>
-          </TouchableOpacity>
-        ))
-      }
+    <SafeAreaView style={{ width: '100%', justifyContent: 'flex-start', /** marginRight: 20, */ }}>
+      <ScrollView>
+        {
+          _.orderBy(props.posts, ['publishedAt'], ['desc']).map((post: PostDetailsModel) => (
+            <TouchableOpacity key={post.id} style={styles.postList} onPress={() => filterBySelectedAuthor(post)}>
+              <Card key={post.id} containerStyle={{ padding: 2, marginTop: 20 }} >
+                <ListItem
+                  key={post.id}
+                  title={post.title}
+                  subtitle={post.author.name}
+                  bottomDivider
+                />
+                <Text style={{ padding: 15 }}>{post.body}</Text>
+                <Text>{post.publishedAt}</Text>
+              </Card>
+            </TouchableOpacity>
+          ))
+        }
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -49,10 +50,6 @@ const styles = StyleSheet.create({
   postList: {
     flexGrow: 1,
     width: '100%',
-    flexWrap: 'wrap',
-  },
-  cardStyle: {
-    padding: 15,
     flexWrap: 'wrap',
   }
 });
