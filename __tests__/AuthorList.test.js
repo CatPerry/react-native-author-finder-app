@@ -7,7 +7,14 @@ import ListsContainer from '../src/components/ListsContainer';
 test('ListsContainer fetches data correctly', async () => {
   const promise = Promise.resolve();
   const handleFetchData = jest.fn(() => promise);
-  const wrapper = renderer.create(<MockedNavigator component={ListsContainer} handleFetchData={handleFetchData} />).toJSON();
+  const wrapper = renderer
+    .create(
+      <MockedNavigator
+        component={ListsContainer}
+        handleFetchData={handleFetchData}
+      />
+    )
+    .toJSON();
 
   expect(wrapper).toMatchSnapshot();
   await act(() => promise);
