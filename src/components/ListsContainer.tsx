@@ -1,7 +1,13 @@
 import 'react-native-gesture-handler';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { Platform, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Button, ListItem } from 'react-native-elements';
 import { AntDesign } from '@expo/vector-icons';
 import PostDetailsModel from '../models/PostDetailsModel';
@@ -13,15 +19,15 @@ const ListsContainer: React.FunctionComponent = () => {
   const [shouldShowBackButton, setshouldShowBackButton] = useState(false);
 
   const fetchData = async () => {
-    const API_PATH = Platform.OS === 'android' ? '192.168.1.151' : 'localhost:4000';
+    const API_PATH =
+      Platform.OS === 'android' ? '192.168.1.151' : 'localhost:4000';
     await fetch(`http://${API_PATH}/posts`)
-      .then(response => response.json())
-      .then(data => setPosts(data))
+      .then((response) => response.json())
+      .then((data) => setPosts(data))
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-
     fetchData();
   }, []);
 
@@ -31,7 +37,10 @@ const ListsContainer: React.FunctionComponent = () => {
   };
 
   const filterByAuthor = (post: PostDetailsModel): void => {
-    let filteredPosts = posts.filter((individual: PostDetailsModel) => individual.author.name === post.author.name);
+    let filteredPosts = posts.filter(
+      (individual: PostDetailsModel) =>
+        individual.author.name === post.author.name
+    );
     setFilteredPosts(filteredPosts);
     setshouldShowBackButton(true);
   };
@@ -43,10 +52,20 @@ const ListsContainer: React.FunctionComponent = () => {
   const renderButton = (): React.ReactNode => {
     return (
       <Button
-        title='Back'
-        buttonStyle={{ backgroundColor: '#6169c4', justifyContent: 'flex-start', }}
+        title="Back"
+        buttonStyle={{
+          backgroundColor: '#6169c4',
+          justifyContent: 'flex-start',
+        }}
         onPress={() => resetPosts()}
-        icon={<AntDesign name='leftcircle' size={24} color='white' style={{ paddingLeft: 5, paddingRight: 9 }} />}
+        icon={
+          <AntDesign
+            name="leftcircle"
+            size={24}
+            color="white"
+            style={{ paddingLeft: 5, paddingRight: 9 }}
+          />
+        }
       />
     );
   };
@@ -54,11 +73,10 @@ const ListsContainer: React.FunctionComponent = () => {
   return (
     <ScrollView style={{ paddingTop: 25 }}>
       <View>
-        {shouldShowBackButton ? renderButton()
-          : null}
-        {
-          _.uniqBy(showCorrectPosts(), 'author.name').map((post: PostDetailsModel) => (
-            <TouchableOpacity key={post.id} >
+        {shouldShowBackButton ? renderButton() : null}
+        {_.uniqBy(showCorrectPosts(), 'author.name').map(
+          (post: PostDetailsModel) => (
+            <TouchableOpacity key={post.id}>
               <ListItem
                 key={post.id}
                 onPress={() => filterByAuthor(post)}
@@ -66,11 +84,11 @@ const ListsContainer: React.FunctionComponent = () => {
                 bottomDivider
               />
             </TouchableOpacity>
-          ))
-        }
+          )
+        )}
       </View>
       <PostList posts={showCorrectPosts()} style={styles.postList} />
-    </ScrollView >
+    </ScrollView>
   );
 };
 

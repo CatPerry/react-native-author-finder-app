@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: '#848785',
     padding: 15,
-  }
+  },
 });
 
 export default Main;

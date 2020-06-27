@@ -10,15 +10,14 @@ import PostDetails from './PostDetails';
 const Stack = createStackNavigator();
 
 export const App: React.FunctionComponent = () => {
-
   return (
     <NavigationContainer>
       <Header />
-      <Stack.Navigator initialRouteName='Main'>
-        <Stack.Screen name='Author Finder' component={Main} />
-        <Stack.Screen name='PostDetails' component={PostDetails} />
+      <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen name="Author Finder" component={Main} />
+        <Stack.Screen name="PostDetails" component={PostDetails} />
       </Stack.Navigator>
-    </NavigationContainer >
+    </NavigationContainer>
   );
 };
 

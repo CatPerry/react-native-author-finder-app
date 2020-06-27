@@ -10,7 +10,7 @@ const HeaderComponent: React.FunctionComponent = () => {
       leftComponent={{ text: 'Bookable', style: { color: '#fff' } }}
       rightComponent={{ icon: 'home', color: '#fff' }}
       style={styles.container}
-      backgroundColor='#41bdc4'
+      backgroundColor="#41bdc4"
       // ViewComponent={LinearGradient}
       linearGradientProps={{
         colors: ['#41bdc4', '#3d7282'],
@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 0,
     width: '100%',
-  }
+  },
 });
 export default HeaderComponent;
