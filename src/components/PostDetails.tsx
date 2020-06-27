@@ -15,10 +15,10 @@ const PostDetails: React.FunctionComponent = ({ route }) => {
       >
         {selectedAuthorData.map((data: PostDetailsModel) => {
           return (
-            <View key={data.title} style={{ backgroundColor: '#FFF', paddingTop: 25, paddingLeft: 25, paddingRight: 25 }}>
-              <Text style={styles.headerText}>Book: {data.title}</Text>
-              <Text style={styles.headerText}>{data.author.name}</Text>
-              <Markdown >
+            <View key={data.title} style={styles.markdownContainer}>
+              <Text style={styles.headerText}>{data.title}</Text>
+              <Text style={styles.subheadText}>{data.author.name}</Text>
+              <Markdown>
                 {data.body}
               </Markdown>
             </View>
@@ -30,14 +30,24 @@ const PostDetails: React.FunctionComponent = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
+  markdownContainer: {
+    backgroundColor: '#FFF',
+    paddingTop: 25,
+    paddingLeft: 25,
+    paddingRight: 25,
+    marginBottom: 15,
+    borderColor: '#c7c9c8',
+    borderWidth: 0.5
+  },
   headerText: {
+    color: '#6169c4',
     fontSize: 28,
-    color: '#848785',
+    fontStyle: 'italic'
   },
   subheadText: {
+    color: '#848785',
     fontSize: 20,
     marginBottom: 20,
-    color: '#848785',
   }
 });
 

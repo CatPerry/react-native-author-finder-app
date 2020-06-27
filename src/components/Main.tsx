@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import AuthorList from './AuthorList';
+import ListsContainer from './ListsContainer';
 
 const Main: React.FunctionComponent = () => {
   return (
     <View style={styles.container}>
-      <AuthorList />
+      <ListsContainer />
     </View>
   );
 };

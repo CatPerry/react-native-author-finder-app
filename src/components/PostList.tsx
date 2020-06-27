@@ -14,7 +14,7 @@ interface Props {
 const PostList = (props: Props) => {
   const navigation = useNavigation();
 
-  const filterBySelectedAuthor = (post: PostDetailsModel) => {
+  const filterBySelectedAuthor = (post: PostDetailsModel): void => {
     const selectedAuthorData: PostDetailsModel[] = props.posts.filter((author: PostDetailsModel) => author.author.name === post.author.name);
     navigation.navigate('PostDetails', {
       selectedAuthorData
@@ -39,7 +39,7 @@ const PostList = (props: Props) => {
                   bottomDivider
                 />
                 <Text style={{ padding: 15 }}>{post.body}</Text>
-                <Text>{post.publishedAt}</Text>
+                <Text style={{ paddingLeft: 15 }}>{post.publishedAt}</Text>
               </Card>
             </TouchableOpacity>
           ))
