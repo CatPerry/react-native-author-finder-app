@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, Icon, ListItem } from 'react-native-elements';
-
+import { AntDesign } from '@expo/vector-icons';
 import PostDetailsModel from '../models/PostDetailsModel';
 import PostList from './PostList';
 
@@ -12,10 +12,14 @@ const AuthorList: React.FunctionComponent = () => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [shouldShowBackButton, setshouldShowBackButton] = useState(false);
 
-  useEffect(() => {
-    fetch('http://localhost:4000/posts')
+  const fetchData = async () => {
+    await fetch('http://localhost:4000/posts')
       .then(response => response.json())
       .then(data => setPosts(data));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const resetPosts = () => {
@@ -34,10 +38,21 @@ const AuthorList: React.FunctionComponent = () => {
     return !_.isEmpty(filteredPosts) ? filteredPosts : posts;
   };
 
+  const renderButton = () => {
+    return (
+      <Button
+        title='Back'
+        buttonStyle={{ backgroundColor: '#6169c4', justifyContent: 'flex-start', }}
+        onPress={() => resetPosts()}
+        icon={<AntDesign name='leftcircle' size={24} color='white' style={{ paddingRight: 15 }} />}
+      />
+    );
+  };
+
   return (
     <ScrollView style={{ paddingTop: 25 }}>
       <View>
-        {shouldShowBackButton ? <Button title='Back' buttonStyle={{ backgroundColor: '#88adab' }} onPress={() => resetPosts()} />
+        {shouldShowBackButton ? renderButton()
           : null}
         {
           _.uniqBy(showCorrectPosts(), 'author.name').map((post: PostDetailsModel) => (

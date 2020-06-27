@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, ListItem, Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-
 import PostDetailsModel from '../models/PostDetailsModel';
 
 interface Props {
@@ -28,10 +27,14 @@ const PostList = (props: Props) => {
         {
           _.orderBy(props.posts, ['publishedAt'], ['desc']).map((post: PostDetailsModel) => (
             <TouchableOpacity key={post.id} style={styles.postList} onPress={() => filterBySelectedAuthor(post)}>
-              <Card key={post.id} containerStyle={{ padding: 2, marginTop: 20 }} >
+              <Card
+                key={post.id}
+                containerStyle={{ padding: 2, marginTop: 20 }}
+              >
                 <ListItem
                   key={post.id}
                   title={post.title}
+                  titleStyle={{ color: '#6169c4', fontSize: 22, fontStyle: 'italic' }}
                   subtitle={post.author.name}
                   bottomDivider
                 />

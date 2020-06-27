@@ -1,21 +1,22 @@
 {
   "main": "./src/index.ts",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start && prettier-watch",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
     "prettier": "prettier --config .prettierrc.json --list-different 'src/**/*.{js,ts,jsx,tsx,svg}'",
-    "prettier-write": "prettier --config .prettierrc.json --write 'src/**/*.{js,ts,jsx,tsx,svg}'"
+    "prettier-write": "prettier --config .prettierrc.json --write 'src/**/*.{js,ts,jsx,tsx,svg}'",
+    "prettier-watch": "onchange '**/*.{js,ts,jsx,tsx,svg}' -- prettier --write {{changed}}"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/native": "^5.5.1",
     "@react-navigation/stack": "^5.5.1",
-    "date-fns": "^2.14.0",
     "expo": "~37.0.3",
+    "isomorphic-fetch": "^2.2.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
@@ -26,7 +27,9 @@
     "react-native-reanimated": "~1.7.0",
     "react-native-safe-area-context": "0.7.3",
     "react-native-screens": "~2.2.0",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-navigation-hooks": "^1.1.0",
+    "expo-linear-gradient": "~8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
