@@ -6,7 +6,7 @@ Things to pay attention to: component structure and overall architecture, Typesc
 
 Designed for an enjoyable user experience and quick access to much-needed info.
 
-![App Screenshot in iOS]('https://repository-images.githubusercontent.com/274006878/5a783580-b8aa-11ea-852e-950c89bce9d7')
+![App Screenshot in iOS](https://repository-images.githubusercontent.com/274006878/5a783580-b8aa-11ea-852e-950c89bce9d7)
 
 ## 1. To Run the Client Side of the App
 
