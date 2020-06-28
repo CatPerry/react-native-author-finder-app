@@ -36,3 +36,5 @@ open the `/api` folder (not part of this repo) and run:
 - If you're using React Hooks that set state, your jest tests may throw a warning about not being resolved/wrapped in [`act()`](https://reactjs.org/docs/test-utils.html) while still actually passing. That's the case here. I have to fix this.
 
 - More tests! That test true user flow. Also make tests `.ts` files.
+
+- Add react nav to header
