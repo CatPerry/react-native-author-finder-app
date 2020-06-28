@@ -35,6 +35,4 @@ open the `/api` folder (not part of this repo) and run:
 
 - If you're using React Hooks that set state, your jest tests may throw a warning about not being resolved/wrapped in [`act()`](https://reactjs.org/docs/test-utils.html) while still actually passing. That's the case here. I have to fix this.
 
-- Android and fetching from the API are not working propperly together yet. So the Android app errors out on a device or simulator. I added the polyfills to handle part of this, but the fix isn't complete.
-
 - More tests! That test true user flow. Also make tests `.ts` files.

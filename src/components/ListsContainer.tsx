@@ -20,7 +20,8 @@ const ListsContainer: React.FunctionComponent = () => {
 
   const fetchData = async () => {
     const API_PATH =
-      Platform.OS === 'android' ? '192.168.1.151' : 'localhost:4000';
+      Platform.OS === 'android' ? '192.168.1.151:4000' : 'localhost:4000';
+
     await fetch(`http://${API_PATH}/posts`)
       .then((response) => response.json())
       .then((data) => setPosts(data))
