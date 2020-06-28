@@ -10,6 +10,8 @@ import {
 import { Card, ListItem, Text } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import PostDetailsModel from '../models/PostDetailsModel';
+import Markdown from 'react-native-markdown-display';
+import { format, parseISO } from 'date-fns';
 
 interface Props {
   posts: PostDetailsModel[];
@@ -32,7 +34,7 @@ const PostList = (props: Props) => {
     <SafeAreaView
       style={{
         width: '100%',
-        justifyContent: 'flex-start' /** marginRight: 20, */,
+        justifyContent: 'flex-start',
       }}
     >
       <ScrollView>
@@ -58,8 +60,12 @@ const PostList = (props: Props) => {
                   subtitle={post.author.name}
                   bottomDivider
                 />
-                <Text style={{ padding: 15 }}>{post.body}</Text>
-                <Text style={{ paddingLeft: 15 }}>{post.publishedAt}</Text>
+                <Markdown mergeStyle={true} style={{ body: { padding: 15 } }}>
+                  {post.body}
+                </Markdown>
+                <Text style={{ paddingLeft: 15 }}>
+                  {format(parseISO(post.publishedAt), 'dd-MM-yyyy HH:MMaaaa')}
+                </Text>
               </Card>
             </TouchableOpacity>
           )
